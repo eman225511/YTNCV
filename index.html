@@ -159,6 +159,8 @@ function load(fromParam=false) {
 
   if (!url) return;
 
+  input.value = url; // <- Populate input with the URL
+
   const list = getList(url);
   let embed;
 
@@ -182,7 +184,8 @@ function load(fromParam=false) {
 
 function init() {
   const params = new URLSearchParams(location.search);
-  if (params.get("yt")) load(true);
+  const yt = params.get("yt");
+  if (yt) load(true); // <- Automatically load if ?yt= exists
 }
 
 input.addEventListener("keypress", e => {
