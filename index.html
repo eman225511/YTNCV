@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>YTNCV</title>
+<title>YT Clean</title>
 
 <style>
 body {
@@ -21,6 +21,7 @@ body {
   background: #111;
   display: flex;
   gap: 8px;
+  align-items: center;
 }
 
 input {
@@ -41,6 +42,11 @@ button {
   background: #2a2a2a;
   color: white;
   font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #3a3a3a;
 }
 
 /* Player */
@@ -74,6 +80,7 @@ code {
 <body onload="init()">
 
 <div id="bar">
+  <button onclick="goHome()">🏠</button>
   <input id="input" placeholder="Paste YouTube link or playlist">
   <button onclick="load()">▶</button>
 </div>
@@ -138,7 +145,7 @@ function load(fromParam=false) {
   let embed;
 
   if (list) {
-    // 🔥 playlist support
+    // playlist support
     embed = `https://www.youtube-nocookie.com/embed/videoseries?list=${list}&autoplay=1`;
   } else {
     const id = getID(url);
@@ -157,6 +164,15 @@ function load(fromParam=false) {
   document.getElementById("info").style.display = "none";
 
   history.replaceState(null, "", "?yt=" + encodeURIComponent(url));
+}
+
+// Home button
+function goHome() {
+  player.innerHTML = "";
+  player.style.display = "none";
+  document.getElementById("info").style.display = "block";
+  input.value = "";
+  history.replaceState(null, "", location.pathname);
 }
 
 // Init on load
