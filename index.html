@@ -113,6 +113,9 @@ code {
 </div>
 
 <div id="embed-container"></div>
+<div id="actions" style="display:none; margin-bottom:15px;">
+  <button onclick="shareVideo()">🔗 Share</button>
+</div>
 
 <div id="info">
   <b>How to use:</b><br>
@@ -152,6 +155,23 @@ function getList(url) {
   }
 }
 
+function shareVideo() {
+  const url = window.location.href;
+
+  // iOS / modern browsers
+  if (navigator.share) {
+    navigator.share({
+      title: "YTNCV",
+      text: "Watch this on YTNCV",
+      url: url
+    });
+  } else {
+    // fallback: copy
+    navigator.clipboard.writeText(url);
+    alert("Link copied!");
+  }
+}
+
 function load(fromParam=false) {
   let url = fromParam 
     ? new URLSearchParams(location.search).get("yt")
@@ -160,6 +180,7 @@ function load(fromParam=false) {
   if (!url) return;
 
   input.value = url; // <- Populate input with the URL
+  document.getElementById("actions").style.display = "block";
 
   const list = getList(url);
   let embed;
