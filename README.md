@@ -23,7 +23,7 @@ A minimal, cookie-free YouTube player for watching videos and playlists without 
 
 ## iOS Shortcuts
 
-You can easily open YouTube videos or playlists from your iPhone or iPad using YTNCV Share Sheet Shortcuts. There are two options:
+You can easily open YouTube videos or playlists from your iPhone or iPad using YTNCV Share Sheet Shortcuts. There are three options:
 
 ### 1. **YTNCV Watcher (Multi)**
 [Get the Shortcut](https://www.icloud.com/shortcuts/e70703fb204d47dca238d894270cfaed)  
@@ -31,10 +31,16 @@ You can easily open YouTube videos or playlists from your iPhone or iPad using Y
 - Prompts you to choose **Safari, Chrome, or Web View** when opening a video.
 - Ideal if you want **more control** over which browser or web container to use.
 
-### 2. **YTNCV Watcher (Basic)**
-[Get the Shortcut](https://www.icloud.com/shortcuts/7ae1080594bf401eb5213961ceac8061)  
+### 2. **YTNCV Watcher (BasicS)**
+[Get the Shortcut](https://www.icloud.com/shortcuts/3b9c8d8019404a219325d5014fc38841)
 
 - Opens the link directly in **Safari** without asking.
+- Ideal for **quick access** and minimal interaction.
+
+### 3. **YTNCV Watcher (BasicC)**
+[Get the Shortcut](https://www.icloud.com/shortcuts/b8901e1f4e31430e8c3283f2c14ec795)
+
+- Opens the link directly in **Chrome** without asking.
 - Ideal for **quick access** and minimal interaction.
 
 **How to use either shortcut:**
