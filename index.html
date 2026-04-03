@@ -15,6 +15,45 @@ body {
   padding: 10px;
 }
 
+/* Actions row (under player) */
+#actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+/* Match top bar button style */
+#actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  height: 44px;
+  border-radius: 10px;
+  border: none;
+  background: #2a2a2a;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.05s ease;
+}
+
+/* Hover + tap feel */
+#actions button:hover {
+  background: #3a3a3a;
+}
+
+#actions button:active {
+  transform: scale(0.96);
+}
+
+/* Optional: subtle icon spacing */
+#actions button span {
+  margin-left: 6px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
 /* Top bar */
 #bar {
   display: flex;
@@ -113,7 +152,7 @@ code {
 </div>
 
 <div id="embed-container"></div>
-<div id="actions" style="display:none; margin-bottom:15px;">
+<div id="actions" style="display:none;">
   <button onclick="shareVideo()">🔗 Share</button>
 </div>
 
