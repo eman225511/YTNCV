@@ -137,6 +137,80 @@ code {
   padding: 3px 6px;
   border-radius: 6px;
 }
+/* Collapsible dropdown container */
+#more-info-dropdown {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #aaa;
+}
+
+/* Toggle button */
+#more-info-dropdown button {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  background: #2a2a2a;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.2s ease, transform 0.05s ease;
+}
+
+#more-info-dropdown button:hover {
+  background: #3a3a3a;
+}
+
+#more-info-dropdown button:active {
+  transform: scale(0.96);
+}
+
+/* Collapsible content */
+#more-info-dropdown .content {
+  display: none;
+  margin-top: 10px;
+  padding: 10px;
+  background: #111;
+  border-radius: 8px;
+}
+
+/* Bookmarklet link + copy button */
+.bookmarklet-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.bookmarklet-row a {
+  display: inline-block;
+  padding: 6px 12px;
+  background: #2a2a2a;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.bookmarklet-row a.drag-hint::after {
+  content: " (drag to bookmarks)";
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.bookmarklet-row button {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: none;
+  background: #2a2a2a;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.bookmarklet-row button:hover,
+.bookmarklet-row a:hover {
+  background: #3a3a3a;
+}
 </style>
 </head>
 <body onload="init()">
@@ -168,11 +242,44 @@ code {
   You can also open directly with:<br>
   <code>?yt=YOUR_LINK</code>
 </div>
+<div id="more-info-dropdown">
+  <button onclick="toggleDropdown()">More Info / Shortcuts ▼</button>
+  <div class="content">
+    <p>See the full GitHub <a href="https://github.com/eman225511/YTNCV" target="_blank">README</a> for more info.</p>
+
+    <!-- Bookmarklet -->
+    <div class="bookmarklet-row">
+      <a href="javascript:(function(){let u=new URL(location.href);let v=u.searchParams.get('v');let l=u.searchParams.get('list');let clean='';if(v){clean='https://www.youtube.com/watch?v='+v;}if(l){clean+=(v?'&':'https://www.youtube.com/playlist?')+'list='+l;}if(!clean)clean=location.href;location.href='https://eman225511.github.io/YTNCV/?yt='+encodeURIComponent(clean);})();" 
+         title="Drag to bookmarks bar" 
+         class="drag-hint">YTNCV Bookmarklet</a>
+      <button onclick="copyBookmarklet()">Tap to Copy</button>
+    </div>
+
+    <!-- Shortcuts -->
+    <ul>
+      <li><b>YTNCV Watcher (Multi)</b>: <a href="https://www.icloud.com/shortcuts/e70703fb204d47dca238d894270cfaed" target="_blank">Get Shortcut</a> — Prompts Safari, Chrome, or Web View</li>
+      <li><b>YTNCV Watcher (BasicS)</b>: <a href="https://www.icloud.com/shortcuts/3b9c8d8019404a219325d5014fc38841" target="_blank">Get Shortcut</a> — Opens directly in Safari</li>
+      <li><b>YTNCV Watcher (BasicC)</b>: <a href="https://www.icloud.com/shortcuts/b8901e1f4e31430e8c3283f2c14ec795" target="_blank">Get Shortcut</a> — Opens directly in Chrome</li>
+    </ul>
+  </div>
+</div>
 
 <script>
 const input = document.getElementById("input");
 const embedContainer = document.getElementById("embed-container");
 
+function toggleDropdown() {
+  const content = document.querySelector("#more-info-dropdown .content");
+  content.style.display = content.style.display === "none" ? "block" : "none";
+}
+
+function copyBookmarklet() {
+  const code = `javascript:(function(){let u=new URL(location.href);let v=u.searchParams.get('v');let l=u.searchParams.get('list');let clean='';if(v){clean='https://www.youtube.com/watch?v='+v;}if(l){clean+=(v?'&':'https://www.youtube.com/playlist?')+'list='+l;}if(!clean)clean=location.href;location.href='https://eman225511.github.io/YTNCV/?yt='+encodeURIComponent(clean);})();`;
+  navigator.clipboard.writeText(code)
+    .then(() => alert("Bookmarklet copied! Tap and hold to paste in bookmarks bar (iOS)"))
+    .catch(() => alert("Failed to copy"));
+}
+  
 function getID(url) {
   try {
     const u = new URL(url);
