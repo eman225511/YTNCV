@@ -279,7 +279,23 @@ function copyBookmarklet() {
     .then(() => alert("Bookmarklet copied! Tap and hold to paste in bookmarks bar (iOS)"))
     .catch(() => alert("Failed to copy"));
 }
-  
+
+function handleBookmarkletUI() {
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  const dragLink = document.querySelector(".drag-hint");
+  const copyBtn = document.querySelector(".bookmarklet-row button");
+
+  if (isMobile) {
+    // 📱 Mobile → hide drag, show copy
+    if (dragLink) dragLink.style.display = "none";
+    if (copyBtn) copyBtn.style.display = "inline-block";
+  } else {
+    // 💻 Desktop → show drag, hide copy
+    if (dragLink) dragLink.style.display = "inline-block";
+    if (copyBtn) copyBtn.style.display = "none";
+  }
+}
 function getID(url) {
   try {
     const u = new URL(url);
@@ -353,6 +369,7 @@ function init() {
   const params = new URLSearchParams(location.search);
   const yt = params.get("yt");
   if (yt) load(true); // <- Automatically load if ?yt= exists
+  handleBookmarkletUI();
 }
 
 input.addEventListener("keypress", e => {
