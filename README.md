@@ -21,23 +21,55 @@ A minimal, cookie-free YouTube player for watching videos and playlists without 
 
 ---
 
-## iOS Shortcuts
+# Bookmarklet & Shortcuts
+
+Open any YouTube video, Shorts, or playlist directly in **YTNCV** (cookie-free) using the bookmarklet or iOS shortcuts.
+
+---
+
+## Bookmarklet
+
+**Code:**
+
+```javascript
+javascript:(function(){
+  let u = new URL(location.href);
+  let v = u.searchParams.get('v');
+  let l = u.searchParams.get('list');
+  let clean = '';
+  if(v){ clean = 'https://www.youtube.com/watch?v=' + v; }
+  if(l){ clean += (v ? '&' : 'https://www.youtube.com/playlist?') + 'list=' + l; }
+  if(!clean) clean = location.href;
+  location.href = 'https://eman225511.github.io/YTNCV/?yt=' + encodeURIComponent(clean);
+})();
+```
+
+### How to add it:
+- Desktop: Drag the bookmarklet link from the website to your bookmarks bar.
+- iOS: Tap Tap to Copy in the website dropdown, then create a new bookmark and paste the code into the URL field.
+
+#### Usage:
+1.	Open any YouTube video, Shorts, or playlist.
+2.	Click the bookmarklet.
+3.	It will open directly in YTNCV for clean, cookie-free playback.
+
+# iOS Shortcuts
 
 You can easily open YouTube videos or playlists from your iPhone or iPad using YTNCV Share Sheet Shortcuts. There are three options:
 
-### 1. **YTNCV Watcher (Multi)**
+## 1. **YTNCV Watcher (Multi)**
 [Get the Shortcut](https://www.icloud.com/shortcuts/e70703fb204d47dca238d894270cfaed)  
 
 - Prompts you to choose **Safari, Chrome, or Web View** when opening a video.
 - Ideal if you want **more control** over which browser or web container to use.
 
-### 2. **YTNCV Watcher (BasicS)**
+## 2. **YTNCV Watcher (BasicS)**
 [Get the Shortcut](https://www.icloud.com/shortcuts/3b9c8d8019404a219325d5014fc38841)
 
 - Opens the link directly in **Safari** without asking.
 - Ideal for **quick access** and minimal interaction.
 
-### 3. **YTNCV Watcher (BasicC)**
+## 3. **YTNCV Watcher (BasicC)**
 [Get the Shortcut](https://www.icloud.com/shortcuts/b8901e1f4e31430e8c3283f2c14ec795)
 
 - Opens the link directly in **Chrome** without asking.
